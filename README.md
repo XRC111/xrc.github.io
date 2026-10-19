@@ -1,41 +1,99 @@
+<div align="center">
 
-# Academic Pages
+# xrc.github.io
 
-![pages-build-deployment](https://github.com/academicpages/academicpages.github.io/actions/workflows/pages/pages-build-deployment/badge.svg)
+**个人主页 —— 基于 Academic Pages（Jekyll）搭建，托管于 GitHub Pages**
 
-Academic Pages is a Github Pages template for academic websites.
+[![Pages](https://img.shields.io/badge/GitHub%20Pages-online-222?style=flat-square&logo=github)](https://xrc111.github.io/)
+[![Jekyll](https://img.shields.io/badge/Jekyll-4.x-CC0000?style=flat-square&logo=jekyll)](https://jekyllrb.com/)
+[![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](./LICENSE)
 
+</div>
 
-# Getting Started
+---
 
-1. Register a GitHub account if you don't have one and confirm your e-mail (required!)
-1. Click the "Use this template" button in the top right.
-1. On the "New repository" page, enter your repository name as "[your GitHub username].github.io", which will also be your website's URL.
-1. Set site-wide configuration and add your content.
-1. Upload any files (like PDFs, .zip files, etc.) to the `files/` directory. They will appear at https://[your GitHub username].github.io/files/example.pdf.  
-1. Check status by going to the repository settings, in the "GitHub pages" section
-1. (Optional) Use the Jupyter notebooks or python scripts in the `markdown_generator` folder to generate markdown files for publications and talks from a TSV file.
+## 简介
 
-See more info at https://academicpages.github.io/
+这是个人站点仓库，使用 [Academic Pages](https://github.com/academicpages/academicpages.github.io) 模板（Jekyll + Minimal Mistakes 衍生主题），通过 GitHub Pages 自动构建发布。
 
-## Running Locally
+站点用于放置个人介绍、项目作品、文章与简历。
 
-When you are initially working your website, it is very useful to be able to preview the changes locally before pushing them to GitHub. To work locally you will need to:
+> **当前状态**：模板占位内容（`Your Name` / `Your Sidebar Name`）尚未替换，按下方「定制清单」逐项修改即可。
 
-1. Clone the repository and made updates as detailed above.
-1. Make sure you have ruby-dev, bundler, and nodejs installed: `sudo apt install ruby-dev ruby-bundler nodejs`
-1. Run `bundle install` to install ruby dependencies. If you get errors, delete Gemfile.lock and try again.
-1. Run `jekyll serve -l -H localhost` to generate the HTML and serve it from `localhost:4000` the local server will automatically rebuild and refresh the pages on change.
+## 目录结构
 
+```
+.
+├── _config.yml          # 站点全局配置（标题、作者、社交链接）
+├── _data/
+│   └── navigation.yml   # 顶部导航
+├── _pages/              # 独立页面（关于、简历、作品集…）
+├── _posts/              # 博客文章（Markdown）
+├── _includes/           # 局部模板（作者卡片、页脚…）
+├── _layouts/            # 页面布局
+├── _sass/               # 样式变量与组件
+├── assets/
+│   ├── css/             # 主样式
+│   ├── images/          # 图片（头像 profile.png 等）
+│   └── js/
+├── files/               # 可直接下载的 PDF / 附件
+├── markdown_generator/  # 从 TSV 批量生成文章/出版物页面的脚本
+├── Gemfile
+└── _config.dev.yml      # 本地开发覆盖配置
+```
 
-# Maintenance 
+## 本地预览
 
-Bug reports and feature requests to the template  should be [submitted via GitHub](https://github.com/academicpages/academicpages.github.io/issues/new/choose). For questions concerning how to style the template, please feel free to start a [new discussion on GitHub](https://github.com/academicpages/academicpages.github.io/discussions).
+```bash
+# 依赖：Ruby 3.x、Bundler、Node.js
+bundle install
+bundle exec jekyll serve -l -H 0.0.0.0
+# 打开 http://localhost:4000
+```
 
-This repository was forked (then detached) by [Stuart Geiger](https://github.com/staeiou) from the [Minimal Mistakes Jekyll Theme](https://mmistakes.github.io/minimal-mistakes/), which is © 2016 Michael Rose and released under the MIT License (see LICENSE.md). It is currently being maintained by [Robert Zupko](https://github.com/rjzupkoii) and additional maintainers would be welcomed.
+> 修改 `_config.yml` 后需要重启服务。若 `bundle install` 失败，删除 `Gemfile.lock` 重试。
 
-## Bugfixes and enhancements
+## 部署
 
-If you have bugfixes and enhancements that you would like to submit as a pull request, you will need to [fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo) this repository as opposed to using it as a template. This will also allow you to [synchronize your copy](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork) of template to your fork as well.
+推送到 `main` 分支后，GitHub Pages 会自动构建（仓库 Settings → Pages → Source 选择 GitHub Actions / 分支）。
 
-Unfortunately, one logistical issue with a template theme like Academic Pages that makes it a little tricky to get bug fixes and updates to the core theme. If you use this template and customize it, you will probably get merge conflicts if you attempt to synchronize. If you want to save your various .yml configuration files and markdown files, you can delete the repository and fork it again. Or you can manually patch.
+自定义域名：在 `_config.yml` 修改 `url`，并在仓库根目录添加 `CNAME` 文件。
+
+## 定制清单
+
+- [ ] `_config.yml`：`title` / `name` / `description` / `url` / `repository`
+- [ ] `_config.yml` 的 `author`：头像、姓名、简介、所在地、单位、社交链接
+- [ ] `_data/navigation.yml`：顶部导航项
+- [ ] `_pages/about.md`：个人介绍
+- [ ] `assets/images/profile.png`：头像
+- [ ] `_pages/` 下的项目/简历页面
+- [ ] `_posts/`：第一篇文章
+- [ ] 删除模板自带的示例文章与图片
+
+## 写作
+
+新建文章：`_posts/YYYY-MM-DD-title.md`，头部字段：
+
+```yaml
+---
+title: "文章标题"
+date: 2026-01-01
+categories: [笔记]
+tags: [Jekyll, 前端]
+---
+```
+
+批量生成（出版物/演讲）：`markdown_generator/` 下的 Python 脚本读取 TSV，输出 Markdown。
+
+## 常见问题
+
+| 问题 | 处理 |
+| --- | --- |
+| 本地 4000 端口被占用 | `bundle exec jekyll serve --port 4001` |
+| 改了 `_config.yml` 不生效 | 重启 `jekyll serve` |
+| 页面 404 | 检查 front matter 的 `permalink` 与文件名 |
+| 样式没更新 | 清理 `_site/` 与浏览器缓存 |
+
+## License
+
+MIT。主题版权归 [Academic Pages](https://github.com/academicpages/academicpages.github.io) 与 [Minimal Mistakes](https://github.com/mmistakes/minimal-mistakes) 作者所有。
